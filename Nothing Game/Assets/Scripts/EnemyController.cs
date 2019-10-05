@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public Transform Player;
-    public float speed = 5.0f;  //acceleration
+    public float speed = 2.0f;  //acceleration
 
     void Start()
     {
