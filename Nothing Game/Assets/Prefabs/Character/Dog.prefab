@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2457632860533710378}
   - component: {fileID: 6004704088748698729}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7c0e180109aeadc4a86e937a36fe6ac8, type: 2}
+  - {fileID: 2100000, guid: 13fa332b38842904ba7b519c70a90469, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 7140331778934798460}
   - component: {fileID: 8497140589865319648}
   - component: {fileID: 2224226198144976590}
+  - component: {fileID: 5794691701118805143}
   m_Layer: 0
   m_Name: Dog
   m_TagString: Untagged
@@ -119,8 +120,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 709988539976398674}
-  m_LocalRotation: {x: 0.7193398, y: 0, z: 0, w: 0.6946584}
-  m_LocalPosition: {x: -0.07040635, y: 0.39, z: -0.94}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.07040635, y: 1.5, z: -0.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 994538969530189735}
@@ -129,7 +130,7 @@ Transform:
   - {fileID: 6578450979274538870}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 92, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &7140331778934798460
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -155,7 +156,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7c0e180109aeadc4a86e937a36fe6ac8, type: 2}
+  - {fileID: 2100000, guid: 13fa332b38842904ba7b519c70a90469, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -190,6 +191,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5794691701118805143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709988539976398674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb7d9b23b20368343b129c0d6775dfb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  speed: 2
 --- !u!1 &5537514717878207328
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,7 +447,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7c0e180109aeadc4a86e937a36fe6ac8, type: 2}
+  - {fileID: 2100000, guid: 13fa332b38842904ba7b519c70a90469, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
