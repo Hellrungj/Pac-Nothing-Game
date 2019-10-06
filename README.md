@@ -2,7 +2,7 @@
 
 ## About:
 
-Ludum Dare 45 Game Jam
+Pac Man Clone made during the Ludum Dare 45 Game Jam.
 
 ## Authors:
 
