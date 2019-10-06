@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.CompareTag("Enemy"))
+        if (col.gameObject.CompareTag("Enemy") && !GameManager.PowerUpActive)
         {
             transform.position = startPos;
             GameManager.GameOver();

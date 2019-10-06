@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public static bool InMenu = false;
+    public bool PowerUpActive = false;
 
     public GameObject mainUI;
     public GameObject pauseMenuUI;
@@ -20,14 +21,13 @@ public class GameController : MonoBehaviour
     public Text pauseCounterText;
 
     private int count;
-    public int countValue = 1;
-    public int maxCountValue = 12;
+    public int countValue;
+    public int maxCountValue;
 
     // Start is called before the first frame update
     void Start()
     {
         Pause();
-
     }
 
     // Update is called once per frame
@@ -142,4 +142,9 @@ public class GameController : MonoBehaviour
         mainUI.SetActive(true);
         Play();
     }
+
+    public void PowerUpPickUp() {
+        PowerUpActive = true;
+    }
+
 }
