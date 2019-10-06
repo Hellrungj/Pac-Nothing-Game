@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     public GameObject startMenuUI;
     public GameObject endGameScreenUI;
     public GameObject winGameScreenUI;
+    public GameObject gameSettingMenuUI;
 
     public Text menuCounterText;
     public Text pauseCounterText;
@@ -26,18 +27,21 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Pause();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GameIsPaused) {
+            if (GameIsPaused)
+            {
                 ResumeGame();
             }
-            else {
+            else
+            {
                 if (!InMenu)
                 {
                     PauseGame();
@@ -48,12 +52,14 @@ public class GameController : MonoBehaviour
 
     // Helpers
 
-    public void Pause() {
+    public void Pause()
+    {
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
 
-    public void Play() {
+    public void Play()
+    {
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
@@ -61,12 +67,13 @@ public class GameController : MonoBehaviour
     public void Counter()
     {
         count = count + countValue;
-        menuCounterText.text = menuCounterText.text + count;
-        pauseCounterText.text = pauseCounterText.text + count;
+        menuCounterText.text = "Gold: " + count;
+        pauseCounterText.text = "Gold Collected: " + count;
         CheckGameState();
     }
 
-    public void CheckGameState() {
+    public void CheckGameState()
+    {
         if (count >= maxCountValue)
         {
             GameWin();
@@ -77,7 +84,8 @@ public class GameController : MonoBehaviour
 
 
     // Pause Menu
-    public void ResumeGame() {
+    public void ResumeGame()
+    {
         pauseMenuUI.SetActive(false);
         mainUI.SetActive(true);
         Play();
@@ -87,6 +95,7 @@ public class GameController : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         mainUI.SetActive(false);
+        gameSettingMenuUI.SetActive(false);
         Pause();
     }
     // Pause Menu
@@ -106,7 +115,8 @@ public class GameController : MonoBehaviour
         Pause();
     }
 
-    public void PlayAgain() {
+    public void PlayAgain()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -116,6 +126,13 @@ public class GameController : MonoBehaviour
     {
         startMenuUI.SetActive(true);
         mainUI.SetActive(false);
+        Pause();
+    }
+
+    public void SettingMenu()
+    {
+        gameSettingMenuUI.SetActive(true);
+        pauseMenuUI.SetActive(false);
         Pause();
     }
 

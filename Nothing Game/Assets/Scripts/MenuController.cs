@@ -12,4 +12,10 @@ public class MenuController : MonoBehaviour
     public void StartGame() => GameManager.StartGame();
     public void PlayAgain() => GameManager.PlayAgain();
 
+    public void PauseMenu() => GameManager.PauseGame();
+
+    public void ApplyChange() => Debug.Log("Applied");
+
+    public void SettingMenu() => GameManager.SettingMenu();
+
 }

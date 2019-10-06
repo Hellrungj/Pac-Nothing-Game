@@ -39,10 +39,5 @@ public class PlayerController : MonoBehaviour
             transform.position = startPos;
             GameManager.GameOver();
         }
-        if (col.gameObject.CompareTag("Food"))
-        {
-            col.gameObject.SetActive(false);
-            GameManager.Counter();
-        }
     }
 }
