@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public static bool GameIsPaused = false;
-    public static bool InMenu = false;
-    public bool PowerUpActive = false;
+    public static bool GameIsPaused;
+    public static bool InMenu;
+    public bool PowerUpActive;
 
     public GameObject mainUI;
     public GameObject pauseMenuUI;
@@ -19,15 +19,23 @@ public class GameController : MonoBehaviour
 
     public Text menuCounterText;
     public Text pauseCounterText;
+    public Text winCounterText;
+    public Text endCounterText;
 
     private int count;
-    public int countValue;
-    public int maxCountValue;
+    public int maxGoldValue = 20;
+
+    public int goldValue = 1;
+    public int enemyValue = 10;
+
+    private int goldAmount;
+    private int enemyAmount;
 
     // Start is called before the first frame update
     void Start()
     {
         Pause();
+        InMenu = true;
     }
 
     // Update is called once per frame
@@ -36,7 +44,7 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GameIsPaused)
+            if (GameIsPaused && pauseMenuUI.activeSelf)
             {
                 ResumeGame();
             }
@@ -64,17 +72,27 @@ public class GameController : MonoBehaviour
         GameIsPaused = false;
     }
 
-    public void Counter()
+    public void Counter(int countValue, string type)
     {
-        count = count + countValue;
-        menuCounterText.text = "Gold: " + count;
-        pauseCounterText.text = "Gold Collected: " + count;
+        if (type.ToLower() == "gold") {
+            goldAmount += countValue;
+            count += countValue;
+        }
+        if (type.ToLower() == "enemy")
+        {
+            enemyAmount += countValue;
+            count += countValue;
+        }
+        menuCounterText.text = "Score: " + count;
+        pauseCounterText.text = "Score: " + count;
+        winCounterText.text = "Score: " + count;
+        endCounterText.text = "Score: " + count;
         CheckGameState();
     }
 
     public void CheckGameState()
     {
-        if (count >= maxCountValue)
+        if (goldAmount >= maxGoldValue)
         {
             GameWin();
         }
@@ -140,6 +158,7 @@ public class GameController : MonoBehaviour
     {
         startMenuUI.SetActive(false);
         mainUI.SetActive(true);
+        InMenu = false;
         Play();
     }
 

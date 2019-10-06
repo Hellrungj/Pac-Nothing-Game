@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Enemy") && !GameManager.PowerUpActive)
         {
-            transform.position = startPos;
+            //transform.position = startPos; Debug
             GameManager.GameOver();
         }
     }

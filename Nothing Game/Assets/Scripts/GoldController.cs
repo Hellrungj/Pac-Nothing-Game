@@ -24,7 +24,7 @@ public class GoldController : MonoBehaviour
         if (col.gameObject.CompareTag("Player"))
         {
             this.gameObject.SetActive(false);
-            GameManager.Counter();
+            GameManager.Counter(GameManager.goldValue,"gold");
         }
     }
 }

@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+    public NavMeshAgent _agent;
+    public float EnemeyDistanceRun = 5.0f;
+
     public GameController GameManager;
     public Transform Player;
 
@@ -24,6 +28,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         startPos = transform.position;
+        _agent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
@@ -35,7 +40,14 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            agent.SetDestination(Player.position);
+            if (!GameManager.PowerUpActive)
+            {
+                agent.SetDestination(Player.position);
+            }
+            else
+            {
+                Run();
+            }
         }
 
         if (GameManager.PowerUpActive)
@@ -45,7 +57,21 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    public void UnPause()
+    public void Run()
+    {
+        float distance = Vector3.Distance(transform.position, Player.transform.position);
+
+        if (distance < EnemeyDistanceRun)
+        {
+            Vector3 dirToPlayer = transform.position - Player.transform.position;
+
+            Vector3 newPos = transform.position + dirToPlayer;
+
+            _agent.SetDestination(newPos);
+        }
+    }
+
+public void UnPause()
     {
         IsPaused = false;
     }
@@ -75,6 +101,7 @@ public class EnemyController : MonoBehaviour
             transform.position = startPos;
             this.gameObject.SetActive(true);
             IsPaused = true;
+            GameManager.Counter(GameManager.enemyValue, "enemy");
         }
     }
 
