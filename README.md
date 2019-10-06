@@ -6,8 +6,8 @@ Ludum Dare 45 Game Jam
 
 ## Authors:
 
-- John Hellrung
-- Kobi Wall. During 
+- [John Hellrung](https://github.com/Hellrungj) 
+- [Kobi Wall](https://github.com/kobiwall)
 
 ## Controls: 
 
