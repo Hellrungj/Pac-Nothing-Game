@@ -7,24 +7,29 @@ public class EnemyController : MonoBehaviour
     public Transform Player;
     public float speed = 2.0f;  //acceleration
 
+    public UnityEngine.AI.NavMeshAgent agent;
+
     void Start()
     {
 
     }
 
     void Update()
-    {
-//      
-        transform.LookAt(Player);
+    {      
+        //transform.LookAt(Player);
 
-        //if (Vector3.Distance(transform.position, Player.position) >= MinDist)
-        //{
-        transform.position += transform.forward * speed * Time.deltaTime;
-        //if (Vector3.Distance(transform.position, Player.position) <= MaxDist)
-        //{
-        //Here Call any function U want Like Shoot at here or something
-        //}
+        //transform.position += transform.forward * speed * Time.deltaTime;
 
-        //}
+        agent.SetDestination(Player.position);
+
     }
+
+//    void OnCollisionEnter(Collision col)
+//    {
+//        if (col.gameObject.CompareTag("Wall"))
+//        {
+//            transform.position += transform.forward * 0 * Time.deltaTime;
+//        }
+//    }
+
 }
