@@ -21,3 +21,7 @@ The following is a set of guidelines for contributing to Pac-Nothing-Game. These
 # What should I know before I get started?
 
 # How Can I Contribute?
+
+# Styleguides
+
+# Additional Notes
