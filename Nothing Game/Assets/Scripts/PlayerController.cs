@@ -4,16 +4,21 @@ public class PlayerController : MonoBehaviour
 {
     public GameController GameManager;
     Rigidbody rb;
-    public float jumpPower = 10;
+
     public float maxspeed = 20; //max allowed speed
-    public float speed = 2.0f;  //acceleration
+    public float speed = 10.0f;  //acceleration
 
     private Vector3 startPos;
+
+    public float jumpForce = 1.0f;
+    public LayerMask GroundLayers;
+    public SphereCollider col;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<SphereCollider>();
         startPos = transform.position;
     }
 
@@ -27,9 +32,18 @@ public class PlayerController : MonoBehaviour
             
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            rb.AddForce(0, 150 + (rb.velocity.magnitude * jumpPower), 0);
+        if (isGrounded())
+        {
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButton("Jump"))
+            {
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
         }
+    }
+
+    private bool isGrounded()
+    {
+        return Physics.CheckCapsule(col.bounds.center, new Vector3(col.bounds.center.x, col.bounds.min.y, col.bounds.center.z), col.radius * .9f, GroundLayers);   
     }
 
     void OnCollisionEnter(Collision col)
