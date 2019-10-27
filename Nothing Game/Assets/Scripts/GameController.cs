@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,10 +13,15 @@ public class GameController : MonoBehaviour
 
     public GameObject mainUI;
     public GameObject pauseMenuUI;
+    public GameObject pauseMenuUIStartingButton;
     public GameObject startMenuUI;
+    public GameObject startMenuUIStartingButton;
     public GameObject endGameScreenUI;
+    public GameObject endGameScreenUIStartingButton;
     public GameObject winGameScreenUI;
+    public GameObject winGameScreenUIStartingButton;
     public GameObject gameSettingMenuUI;
+    public GameObject gameSettingMenuUIStartingButton;
 
     public Text menuCounterText;
     public Text pauseCounterText;
@@ -41,22 +47,49 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
         {
-            if (GameIsPaused && pauseMenuUI.activeSelf)
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7))
             {
-                ResumeGame();
+                pausing();
             }
-            else
+        }
+        else if (Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton9))
             {
-                if (!InMenu)
-                {
-                    PauseGame();
-                }
+                pausing();
+            }
+        }
+        else if (Application.platform == RuntimePlatform.LinuxPlayer || Application.platform == RuntimePlatform.LinuxEditor)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7))
+            {
+                pausing();
+            }
+        }
+        else {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                pausing();
             }
         }
     }
+
+    void pausing()
+    {
+        if (GameIsPaused && pauseMenuUI.activeSelf)
+        {
+            ResumeGame();
+        }
+        else
+        {
+            if (!InMenu)
+            {
+                PauseGame();
+            }
+        }
+    } 
 
     // Helpers
 
@@ -90,6 +123,8 @@ public class GameController : MonoBehaviour
         CheckGameState();
     }
 
+  
+
     public void CheckGameState()
     {
         if (goldAmount >= maxGoldValue)
@@ -114,6 +149,7 @@ public class GameController : MonoBehaviour
         pauseMenuUI.SetActive(true);
         mainUI.SetActive(false);
         gameSettingMenuUI.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(pauseMenuUIStartingButton); 
         Pause();
     }
     // Pause Menu
@@ -123,6 +159,7 @@ public class GameController : MonoBehaviour
     {
         endGameScreenUI.SetActive(true);
         mainUI.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(endGameScreenUIStartingButton);
         Pause();
     }
 
@@ -130,6 +167,7 @@ public class GameController : MonoBehaviour
     {
         winGameScreenUI.SetActive(true);
         mainUI.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(winGameScreenUIStartingButton);
         Pause();
     }
 
@@ -144,6 +182,7 @@ public class GameController : MonoBehaviour
     {
         startMenuUI.SetActive(true);
         mainUI.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(startMenuUIStartingButton);
         Pause();
     }
 
@@ -151,6 +190,7 @@ public class GameController : MonoBehaviour
     {
         gameSettingMenuUI.SetActive(true);
         pauseMenuUI.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(gameSettingMenuUIStartingButton);
         Pause();
     }
 
@@ -165,5 +205,9 @@ public class GameController : MonoBehaviour
     public void PowerUpPickUp() {
         PowerUpActive = true;
     }
+    
+    public void QuitGame() => Application.Quit();
+
+    public void ApplyChange() => Debug.Log("Applied");
 
 }
