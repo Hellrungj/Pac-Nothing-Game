@@ -15,9 +15,9 @@ public class EnemyController : MonoBehaviour
 
     public Color NormalColor;
     public Color FlashColor = Color.blue;
-    public Renderer GameMesh;
-    public int FlashDelay = 3;
-    public int TimesToFlash = 15;
+    public MeshRenderer GameMesh;
+    public float FlashSpeed = 0.5f;
+    public float FlashTime = 15.0f;
 
     public int TimeToWait = 5;  
 
@@ -52,7 +52,7 @@ public class EnemyController : MonoBehaviour
 
         if (GameManager.PowerUpActive)
         {
-            StartCoroutine(Flash());
+            StartCoroutine(FlashObject(GameMesh, NormalColor, FlashColor, FlashTime, FlashSpeed));
         }
 
     }
@@ -76,18 +76,25 @@ public void UnPause()
         IsPaused = false;
     }
 
-    public IEnumerator Flash()
+    IEnumerator FlashObject(MeshRenderer toFlash, Color originalColor, Color flashColor, float flashTime, float flashSpeed)
     {
-        var renderer = GameMesh;
-        if (renderer != null)
-        {
+        // Very Helpfull: https://answers.unity.com/questions/1367570/how-to-make-enemies-flash-on-hit.html
 
-            for (int i = 1; i <= TimesToFlash; i++)
+        float flashingFor = 0;
+        Color newColor = flashColor;
+        while (flashingFor < flashTime)
+        {
+            toFlash.material.color = newColor;
+            flashingFor += Time.deltaTime;
+            yield return new WaitForSeconds(flashSpeed);
+            flashingFor += flashSpeed;
+            if (newColor == flashColor)
             {
-                renderer.material.color = FlashColor;
-                yield return new WaitForSecondsRealtime(FlashDelay);
-                renderer.material.color = NormalColor;
-                yield return new WaitForSecondsRealtime(FlashDelay);
+                newColor = originalColor;
+            }
+            else
+            {
+                newColor = flashColor;
             }
         }
         GameManager.PowerUpActive = false;
