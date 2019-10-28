@@ -16,10 +16,10 @@ public class EnemyController : MonoBehaviour
     public Color NormalColor;
     public Color FlashColor = Color.blue;
     public MeshRenderer GameMesh;
-    public float FlashSpeed = 0.5f;
-    public float FlashTime = 15.0f;
+    public float FlashSpeed = 1f;
+    public float FlashTime = 10.0f;
 
-    public int TimeToWait = 5;  
+    public int TimeToWait = 3;
 
     public UnityEngine.AI.NavMeshAgent agent;
     private Vector3 startPos;
@@ -71,23 +71,25 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-public void UnPause()
+    public void UnPause()
     {
         IsPaused = false;
     }
 
-    IEnumerator FlashObject(MeshRenderer toFlash, Color originalColor, Color flashColor, float flashTime, float flashSpeed)
+    IEnumerator FlashObject(MeshRenderer toFlash, Color originalColor, Color flashColor, float flashTime, float flashSpeed, float flashingFor = 0)
     {
         // Very Helpfull: https://answers.unity.com/questions/1367570/how-to-make-enemies-flash-on-hit.html
 
-        float flashingFor = 0;
         Color newColor = flashColor;
+        Debug.Log("flashTime: " + flashTime);
         while (flashingFor < flashTime)
         {
+            
             toFlash.material.color = newColor;
             flashingFor += Time.deltaTime;
             yield return new WaitForSeconds(flashSpeed);
             flashingFor += flashSpeed;
+            Debug.Log("flashingFor: " + flashingFor);
             if (newColor == flashColor)
             {
                 newColor = originalColor;
