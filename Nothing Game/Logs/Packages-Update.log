@@ -17,7 +17,11 @@ The following packages were updated:
   com.unity.textmeshpro from version 2.0.0 to 2.0.1
   com.unity.timeline from version 0.0.0-builtin to 1.1.0
 
+<<<<<<< HEAD
 === Fri Oct  4 21:14:46 2019
+=======
+=== Sat Oct  5 07:28:08 2019
+>>>>>>> 07fec3eb4d41dbac38de8d08367013fa3b8fef7f
 
 Packages were changed.
 Update Mode: updateDependencies
